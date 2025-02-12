@@ -18,6 +18,13 @@ final ThemeData todolistTheme = ThemeData(
 
 
 class _TodolistAppState extends State<TodolistApp> {
+    List<Task> _tasks = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _tasks = List.from(tasksCollection); 
+  }
   @override
   Widget build(BuildContext context) {
     print(tasksCollection);  
