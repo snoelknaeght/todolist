@@ -1,37 +1,64 @@
 import 'package:flutter/material.dart';
-import './static.dart';
-import './task.dart';
+import './static.dart'; 
+import './task.dart';   
 
 void main() {
   runApp(const TodolistApp());
 }
-class TodolistApp extends StatelessWidget {
+
+class TodolistApp extends StatefulWidget {
   const TodolistApp({super.key});
-  
+
+  @override
+  _TodolistAppState createState() => _TodolistAppState();
+}
+final Color todolistThemeMainColor = Color(0xFF3ABCA7);
+final ThemeData todolistTheme = ThemeData(
+ primaryColor: todolistThemeMainColor);
+
+
+class _TodolistAppState extends State<TodolistApp> {
   @override
   Widget build(BuildContext context) {
-
-    
-    print(tasksCollection);
+    print(tasksCollection);  
 
     return MaterialApp(
+     theme: todolistTheme,
       home: Scaffold(
+        
         appBar: AppBar(
-          title: Text("Todolist"),
+       leading: Image.asset("img/todolist.png"),
+          title: Row(            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+ children: [
+            
+              Text ("Todolist",
+                style: TextStyle(
+                  color: todolistThemeMainColor, 
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30, 
+                )),
+              Text(" ${tasksCollection.length} Tasks", 
+              style: TextStyle(
+                color: Colors.blueGrey,
+                fontWeight: FontWeight.normal,
+                fontSize: 20
+              ),),
+            ],),
+        
         ),
         body: Column(
           children: [
-        
             Expanded(
               child: ListView.builder(
                 itemCount: tasksCollection.length,
                 itemBuilder: (context, index) {
-                  final task = tasksCollection[index]; 
-                  Icon leadingIcon = buildIcon(task.status);
+                  final task = tasksCollection[index];
+                  Icon leadingIcon = buildIcon(task.status); 
 
                   return ListTile(
-                     leading: leadingIcon,
-                    title: Text(task.content),
+                    leading: leadingIcon,
+                    
+                    title: Text(task.content), 
                   );
                 },
               ),
@@ -41,8 +68,9 @@ class TodolistApp extends StatelessWidget {
       ),
     );
   }
-}
- Icon buildIcon(TaskStatus status) {
+
+
+  Icon buildIcon(TaskStatus status) {
     switch (status) {
       case TaskStatus.todo:
         return Icon(Icons.circle, color: const Color.fromARGB(255, 231, 246, 14)); 
@@ -54,3 +82,4 @@ class TodolistApp extends StatelessWidget {
         return Icon(Icons.help, color: Colors.grey);  
     }
   }
+}
