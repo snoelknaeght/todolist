@@ -1,17 +1,25 @@
 import 'package:uuid/uuid.dart';
-enum TaskStatus {todo, doing ,done}
+
+enum TaskStatus { todo, doing, done }
+
 class Task {
-  String? content ; 
+  String content;
   String id;
   DateTime createdAt;
-  DateTime?  completedAt;
+  DateTime? completedAt;
   TaskStatus status;
-@override
 
+  Task({
+    required this.content,
+    String? id,
+    this.status = TaskStatus.todo,
+    DateTime? createdAt,
+    this.completedAt,
+  })  : id = id ?? Uuid().v4(),
+        createdAt = createdAt ?? DateTime.now();
 
-
-  Task({required content, String? id, TaskStatus? status, DateTime? createdAt, DateTime? completedAt})
-  : id = id ?? Uuid().v4(),
-  status = status ?? TaskStatus.todo,
-  createdAt = createdAt ?? DateTime.now();
+  @override
+  String toString() {
+    return 'Task(content: $content, status: $status, createdAt: $createdAt)';
+  }
 }

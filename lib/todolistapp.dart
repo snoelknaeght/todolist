@@ -4,11 +4,9 @@ import './task.dart';
 void main() {
   runApp(const TodolistApp());
 }
-class test{}
 
 class TodolistApp extends StatelessWidget {
   const TodolistApp({super.key});
-  @override
   
   Widget build(BuildContext context) {
         print(tasksCollection);

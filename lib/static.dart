@@ -1,10 +1,4 @@
-import './task.dart';
-
-
-void main(){
-
-  
-}
+import '../task.dart';
 
 final List<Task> tasksCollection = [
   Task(content: "Apprendre Dart"),
