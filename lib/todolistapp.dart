@@ -63,6 +63,7 @@ class _TodolistAppState extends State<TodolistApp> {
                   Icon leadingIcon = buildIcon(task.status); 
 
                   return ListTile(
+              onLongPress: () => _showDeleteDialog(context, task),
                     leading: leadingIcon,
                     
                     title: Text(task.content), 
@@ -75,7 +76,35 @@ class _TodolistAppState extends State<TodolistApp> {
       ),
     );
   }
-
+  void _showDeleteDialog(BuildContext context, Task task) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Supprimer la tâche ?'),
+          content: Text('Voulez-vous vraiment supprimer cette tâche ?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); 
+              },
+              child: Text('Annuler'),
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  _tasks.remove(task); 
+                });
+                Navigator.of(context).pop(); 
+              },
+              child: Text('Supprimer'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
 
   Icon buildIcon(TaskStatus status) {
     switch (status) {
@@ -89,4 +118,3 @@ class _TodolistAppState extends State<TodolistApp> {
         return Icon(Icons.help, color: Colors.grey);  
     }
   }
-}
