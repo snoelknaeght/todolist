@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'todolistapp.dart';  // Importer TodolistApp
+import 'todolistapp.dart'; 
 
 void main() {
-  runApp(const TodolistApp());  // Lancer l'application
+  runApp(const TodolistApp());  
 }
